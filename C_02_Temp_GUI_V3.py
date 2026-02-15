@@ -67,7 +67,10 @@ class Converter:
             self.button_ref_list.append(self.make_button)
 
         # retrieve 'history / export' button and disable it at the start
-        self.to_history_button = self.button_ref_list[3].config(state=DISABLED)
+
+        self.to_history_button = self.button_ref_list[3]
+            
+        self.to_history_button.config(state=DISABLED)
 
     def check_temp(self, min_temp):
         print("Min Temp: ", min_temp)
@@ -124,6 +127,9 @@ class Converter:
         else:
             answer = cr.to_celsius(to_convert)
             answer_statement = f"{to_convert} F is {answer}"
+
+        #enable history export button as soon as we have a valid calculation
+        self.to_history_button.config(state=NORMAL)
 
         self.answer_error.config(text=answer_statement)
         self.all_calculations_list.append(answer)
